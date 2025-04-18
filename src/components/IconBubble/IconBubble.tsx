@@ -1,12 +1,12 @@
 import { Box } from "@chakra-ui/react"
-import { IconBubbleColor } from "./types";
+import { IconBubbleColor } from "../types";
 
 interface IconBubbleProps {
   icon: React.ReactNode;
   color?: IconBubbleColor;
 }
 
-const iconBubbleColors: Record<IconBubbleColor, string> = {
+export const iconBubbleColors: Record<IconBubbleColor, string> = {
   gray: "gray.400",
   green: "green.400",
   blue: "blue.400",

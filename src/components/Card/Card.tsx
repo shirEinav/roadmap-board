@@ -1,9 +1,9 @@
 import { Box, Text, HStack, Stack } from "@chakra-ui/react";
 import { FaRocket } from "react-icons/fa";
-import { IconBubble } from "./IconBubble";
-import { Tag, } from "./Tag";
-import { SubtaskList } from "./SubtaskList";
-import { SubtaskItemProps, TagProps } from "./types";
+import { IconBubble } from "../IconBubble/IconBubble";
+import { Tag, } from "../Tag/Tag";
+import { SubtaskList } from "../SubtaskList/SubtaskList";
+import { SubtaskItemProps, TagProps } from "../types";
 
 interface CardProps {
   title: string;

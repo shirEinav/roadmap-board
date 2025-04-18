@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
-import { Card } from "./components/Card";
-import { Column } from "./components/Column";
+import { Card } from "./components/Card/Card";
+import { Column } from "./components/Column/Column";
 
 export const App = () => {
   return (

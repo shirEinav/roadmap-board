@@ -1,7 +1,7 @@
 import { Tag as ChakraTag } from "@chakra-ui/react";
-import { TagColor, TagProps } from "./types";
+import { TagColor, TagProps } from "../types";
 
-const tagColors: Record<TagColor, string> = {
+export const tagColors: Record<TagColor, string> = {
   gray: "gray.100",
   red: "red.100",
   green: "green.100",
