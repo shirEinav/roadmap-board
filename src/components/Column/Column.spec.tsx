@@ -5,7 +5,7 @@ import { Column } from "./Column";
 describe("<Column />", () => {
   it("renders the column title", () => {
     render(
-      <Column title="Now">
+      <Column id="now" title="Now">
         <div>Card content</div>
       </Column>
     );

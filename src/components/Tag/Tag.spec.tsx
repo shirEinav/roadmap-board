@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "../../__tests__/test-utils";
-import { Tag, tagColors } from "./Tag";
+import { Tag } from "./Tag";
+import { tagColors } from "./Tag.constants";
 
 describe("<Tag />", () => {
   it("renders the label", () => {

@@ -1,7 +1,9 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
 import { IconBubble } from '../IconBubble/IconBubble';
-import { SubtaskItemProps } from "../types";
+import { SubtaskData } from '../types';
+
+export type SubtaskItemProps = SubtaskData;
 
 export const SubtaskItem = ({
   label,

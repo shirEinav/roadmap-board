@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react";
 import { SubtaskItem } from '../SubtaskItem/SubtaskItem';
-import { SubtaskItemProps } from "../types";
+import { SubtaskData } from '../types';
 
 interface SubtaskListProps {
-  items: SubtaskItemProps[];
+  items: SubtaskData[];
 }
 
 export const SubtaskList = ({

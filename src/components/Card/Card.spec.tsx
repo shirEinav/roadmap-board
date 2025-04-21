@@ -1,12 +1,13 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "../../__tests__/test-utils";
-import { SubtaskItemProps } from "../types";
+import { SubtaskData } from "../types";
 import { Card } from "./Card";
 
 describe("<Card />", () => {
   it("renders the card title", () => {
     render(
       <Card
+        id="card-1"
         title="Project Alpha"
         tag={{ label: "Urgent", color: "red" }}
       />
@@ -18,6 +19,7 @@ describe("<Card />", () => {
   it("renders the tag label", () => {
     render(
       <Card
+        id="card-1"
         title="Project Beta"
         tag={{ label: "Feature", color: "green" }}
       />
@@ -27,13 +29,14 @@ describe("<Card />", () => {
   });
 
   it("renders subtasks if provided", () => {
-    const subtasks: SubtaskItemProps[] = [
-      { label: "Subtask 1", color: "green" },
-      { label: "Subtask 2", color: "blue" },
+    const subtasks: SubtaskData[] = [
+      { id: "subtask-1", label: "Subtask 1", color: "green" },
+      { id: "subtask-2", label: "Subtask 2", color: "blue" },
     ];
 
     render(
       <Card
+        id="card-1"
         title="With Subtasks"
         tag={{ label: "Epic", color: "purple" }}
         subtasks={subtasks}
@@ -47,6 +50,7 @@ describe("<Card />", () => {
   it("does not render subtasks if not provided", () => {
     render(
       <Card
+        id="card-1"
         title="Without Subtasks"
         tag={{ label: "Chore", color: "gray" }}
       />

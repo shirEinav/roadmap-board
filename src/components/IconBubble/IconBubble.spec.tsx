@@ -1,8 +1,9 @@
 
 import { describe, it, expect } from "vitest";
-import { render, screen } from "../../__tests__/test-utils";
-import { IconBubble, iconBubbleColors } from "./IconBubble";
 import { FaStar } from "react-icons/fa";
+import { render, screen } from "../../__tests__/test-utils";
+import { IconBubble } from "./IconBubble";
+import { iconBubbleColors } from './IconBubble.constants';
 
 describe("<IconBubble />", () => {
   it("renders the icon", () => {
