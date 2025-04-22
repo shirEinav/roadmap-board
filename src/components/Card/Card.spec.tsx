@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "../../__tests__/test-utils";
-import { SubtaskData } from "../types";
+import { SubtaskData } from "../../types";
 import { Card } from "./Card";
 
 describe("<Card />", () => {

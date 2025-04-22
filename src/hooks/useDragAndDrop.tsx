@@ -1,26 +1,33 @@
 import { DragEndEvent, DragStartEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import { useState } from 'react';
-import { CardData, Columns } from '../components/types';
+import { useEffect, useState } from 'react';
+import { CardData, Columns } from '../types';
 
-export const useDragAndDrop = (initialColumns: Columns) => {
-  const [columns, setColumns] = useState<Columns>(initialColumns);
+export const useDragAndDrop = (initialColumns?: Columns) => {
+  const [columns, setColumns] = useState<Columns>(initialColumns || {});
   const [activeCard, setActiveCard] = useState<CardData | null>(null);
 
-  const findColumn = (id: string) => {
+  useEffect(() => {
+    if (initialColumns) {
+      setColumns(initialColumns);
+    }
+  }, [initialColumns]);
+
+
+  const findColumn = (cardId: string) => {
     return Object.keys(columns).find(key =>
-      columns[key].some(card => card.id === id)
+      columns[key].cards.some(card => card.id === cardId)
     );
   };
 
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
     const activeColumnId = Object.keys(columns).find(columnId =>
-      columns[columnId].some(card => card.id === active.id)
+      columns[columnId].cards.some(card => card.id === active.id)
     );
 
     if (activeColumnId) {
-      const draggedCard = columns[activeColumnId].find(
+      const draggedCard = columns[activeColumnId].cards.find(
         card => card.id === active.id
       );
       if (draggedCard) {
@@ -63,8 +70,8 @@ const moveCardToNewColumn = (
   draggedCardId: string,
   referenceCardId: string
 ): Columns => {
-  const sourceCards = columns[sourceColumnId];
-  const targetCards = columns[targetColumnId];
+  const sourceCards = columns[sourceColumnId].cards;
+  const targetCards = columns[targetColumnId].cards;
 
   const draggedCardIndex = sourceCards.findIndex(card => card.id === draggedCardId);
   const referenceCardIndex = targetCards.findIndex(card => card.id === referenceCardId);
@@ -73,12 +80,18 @@ const moveCardToNewColumn = (
 
   return {
     ...columns,
-    [sourceColumnId]: sourceCards.filter(card => card.id !== draggedCardId),
-    [targetColumnId]: [
-      ...targetCards.slice(0, insertAtIndex),
-      sourceCards[draggedCardIndex],
-      ...targetCards.slice(insertAtIndex),
-    ],
+    [sourceColumnId]: {
+      ...columns[sourceColumnId],
+      cards: sourceCards.filter(card => card.id !== draggedCardId),
+    },
+    [targetColumnId]: {
+      ...columns[targetColumnId],
+      cards: [
+        ...targetCards.slice(0, insertAtIndex),
+        sourceCards[draggedCardIndex],
+        ...targetCards.slice(insertAtIndex),
+      ],
+    },
   };
 };
 
@@ -89,12 +102,15 @@ const reorderCardsWithinColumn = (
   draggedCardId: string,
   referenceCardId: string
 ): Columns => {
-  const cards = columns[columnId];
+  const cards = columns[columnId].cards;
   const fromIndex = cards.findIndex(card => card.id === draggedCardId);
   const toIndex = cards.findIndex(card => card.id === referenceCardId);
 
   return {
     ...columns,
-    [columnId]: arrayMove(cards, fromIndex, toIndex),
+    [columnId]: {
+      ...columns[columnId],
+      cards: arrayMove(cards, fromIndex, toIndex),
+    },
   };
 };

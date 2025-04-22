@@ -1,5 +1,5 @@
 import { Tag as ChakraTag } from "@chakra-ui/react";
-import { TagData } from "../types";
+import { TagData } from "../../types";
 import { tagColors } from "./Tag.constants";
 
 export type TagProps = TagData;

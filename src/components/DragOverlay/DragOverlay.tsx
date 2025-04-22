@@ -1,6 +1,6 @@
 import { DragOverlay } from '@dnd-kit/core';
 import { Card } from '../Card/Card';
-import { CardData } from '../types';
+import { CardData } from '../../types';
 
 interface DraggingOverlayProps {
   draggedItem: CardData | null;

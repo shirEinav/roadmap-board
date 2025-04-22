@@ -3,7 +3,7 @@ import { FaRocket } from "react-icons/fa";
 import { IconBubble } from "../IconBubble/IconBubble";
 import { Tag } from "../Tag/Tag";
 import { SubtaskList } from "../SubtaskList/SubtaskList";
-import { CardData } from "../types";
+import { CardData } from "../../types";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
