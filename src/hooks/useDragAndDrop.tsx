@@ -53,7 +53,7 @@ export const useDragAndDrop = (initialColumns?: Columns) => {
     if (!activeColumn || !overColumn) return;
 
     if (activeColumn === overColumn) {
-      setColumns(prev => reorderCardsWithinColumn(prev, activeColumn, activeId, overId));
+      setColumns(prev => sortCardWithinColumn(prev, activeColumn, activeId, overId));
     } else {
       setColumns(prev => moveCardToNewColumn(prev, activeColumn, overColumn, activeId, overId));
     }
@@ -96,7 +96,7 @@ const moveCardToNewColumn = (
 };
 
 
-const reorderCardsWithinColumn = (
+const sortCardWithinColumn = (
   columns: Columns,
   columnId: string,
   draggedCardId: string,
