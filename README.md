@@ -1,6 +1,6 @@
 An interactive roadmap board built with **React**, **TypeScript**, **Chakra UI**, **React Query**, and **DndKit**.
 
-🚀 [Live Demo](https://roadmap-board.vercel.app/)
+[Live Demo](https://roadmap-board.vercel.app/)
 
 This is a demo project. Built to experiment with drag-and-drop functionality, API integration, while using a clean and modular UI.
 
