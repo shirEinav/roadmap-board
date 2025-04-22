@@ -11,39 +11,19 @@ import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrate
 import { Flex } from '@chakra-ui/react';
 import { Column } from '../Column/Column';
 import { Card } from '../Card/Card';
+import { useRoadmapColumns } from '../../hooks/useRoadmapColumns';
 import { useDragAndDrop } from '../../hooks/useDragAndDrop';
 
+import { RoadmapBoardSkeleton } from './RoadmapBoard.skeleton';
 export const RoadmapBoard = () => {
-  const { columns, handleDragEnd, handleDragStart, activeCard } = useDragAndDrop({
-    Now: [
-      {
-        id: "card-1",
-        title: "Card 1",
-        tag: { label: "RED", color: "red" },
-        subtasks: [
-          {
-            id: "subtask-1",
-            label: "Subtask 1",
-            color: "gray",
-          },
-          {
-            id: "subtask-2",
-            label: "Subtask 2",
-            color: "green",
-          },
-        ],
-      }
-    ],
-    Next: [],
-    Later: [
-      {
-        id: "card-2",
-        title: "Card 2",
-        tag: { label: "blue" },
-        subtasks: [],
-      },
-    ]
-  });
+  const { data: initialColumns, isLoading } = useRoadmapColumns();
+  const {
+    columns,
+    handleDragEnd,
+    handleDragStart,
+    activeCard
+  } = useDragAndDrop(initialColumns);
+
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -51,6 +31,8 @@ export const RoadmapBoard = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  if (isLoading) return <RoadmapBoardSkeleton />;
 
   return (
     <DndContext
@@ -60,13 +42,13 @@ export const RoadmapBoard = () => {
       onDragEnd={handleDragEnd}
     >
       <Flex gap={3} p={6} justify="center">
-        {Object.entries(columns).map(([columnId, cards]) => (
+        {Object.entries(columns).map(([columnId, { title, cards }]) => (
           <SortableContext
             key={columnId}
             items={cards.map(card => card.id)}
             strategy={verticalListSortingStrategy}
           >
-            <Column id={columnId} title={columnId}>
+            <Column id={columnId} title={title}>
               {cards.map(card => (
                 <Card key={card.id} {...card} />
               ))}
