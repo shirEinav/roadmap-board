@@ -1,5 +1,4 @@
-import { IconBubbleColor } from '../../types';
-
+import { IconBubbleColor } from "../types";
 export const iconBubbleColors: Record<IconBubbleColor, string> = {
   gray: "gray.400",
   green: "green.400",

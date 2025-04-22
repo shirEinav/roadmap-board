@@ -1,13 +1,14 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "../../__tests__/test-utils";
 import { SubtaskList } from "./SubtaskList";
-import { SubtaskItemProps } from "../types";
+import { SubtaskItemProps } from '../SubtaskItem/SubtaskItem';
+
 describe("<SubtaskList />", () => {
   it("renders all subtask items", () => {
     const items: SubtaskItemProps[] = [
-      { label: "Write tests", color: "green" },
-      { label: "Fix layout bug", color: "blue" },
-      { label: "Deploy to staging", color: "purple" },
+      { id: "1", label: "Write tests", color: "green" },
+      { id: "2", label: "Fix layout bug", color: "blue" },
+      { id: "3", label: "Deploy to staging", color: "purple" },
     ];
 
     render(<SubtaskList items={items} />);
