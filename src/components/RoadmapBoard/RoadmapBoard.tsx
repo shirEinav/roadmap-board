@@ -7,23 +7,26 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
-import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { Flex } from '@chakra-ui/react';
-import { Column } from '../Column/Column';
-import { Card } from '../Card/Card';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { Flex, Text } from '@chakra-ui/react';
 import { useRoadmapColumns } from '../../hooks/useRoadmapColumns';
 import { useDragAndDrop } from '../../hooks/useDragAndDrop';
-
+import { Column } from '../Column/Column';
+import { Card } from '../Card/Card';
 import { RoadmapBoardSkeleton } from './RoadmapBoard.skeleton';
+
 export const RoadmapBoard = () => {
-  const { data: initialColumns, isLoading } = useRoadmapColumns();
+  const { data: initialColumns, isLoading, isError } = useRoadmapColumns();
   const {
     columns,
     handleDragEnd,
     handleDragStart,
     activeCard
   } = useDragAndDrop(initialColumns);
-
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -33,6 +36,13 @@ export const RoadmapBoard = () => {
   );
 
   if (isLoading) return <RoadmapBoardSkeleton />;
+  if (isError || !initialColumns) {
+    return (
+      <Flex justify="center" p={6}>
+        <Text>Failed to load the roadmap board. Please try again.</Text>
+      </Flex>
+    );
+  }
 
   return (
     <DndContext
@@ -56,9 +66,10 @@ export const RoadmapBoard = () => {
           </SortableContext>
         ))}
       </Flex>
+
       <DragOverlay>
         {activeCard ? <Card {...activeCard} /> : null}
       </DragOverlay>
-    </DndContext >
+    </DndContext>
   );
 };
